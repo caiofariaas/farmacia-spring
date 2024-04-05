@@ -29,6 +29,10 @@ public class Remedio {
 
     public Remedio(RemedioDTO dados) {
         this.nome = dados.nome();
+        this.lote = dados.lote();
+        this.quantidade = dados.quantidade();;
+        this.validade = dados.validade();
         this.via = dados.via();
+        this.laboratorio = dados.laboratorio();
     }
 }

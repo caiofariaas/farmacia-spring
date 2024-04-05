@@ -23,6 +23,5 @@ public class RemedioController {
     public void createRemedio(@RequestBody RemedioDTO dados){
 
         repository.save(new Remedio(dados));
-
     }
 }
