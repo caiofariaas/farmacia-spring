@@ -2,17 +2,27 @@ package com.remedios.caio.entities;
 
 import com.remedios.caio.dtos.enums.Laboratorio;
 import com.remedios.caio.dtos.enums.Via;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.*;
 
-@Entity(name = "remedios")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode(of="id")
 @Table(name = "remedios")
+@Entity(name = "remedios")
 public class Remedio {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
-    private Via via;
     private String lote;
     private Double quantidade;
     private String validade;
+
+    @Enumerated(EnumType.STRING)
+    private Via via;
+    @Enumerated(EnumType.STRING)
     private Laboratorio laboratorio;
 }
