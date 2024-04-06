@@ -6,10 +6,9 @@ import com.remedios.caio.services.RemedioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/remedios")
@@ -27,5 +26,13 @@ public class RemedioController {
         Remedio newRemedio =  service.createRemedio(dados);
 
         return new ResponseEntity<>(newRemedio, HttpStatus.CREATED);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Remedio>> getAllRemedios(){
+
+        List<Remedio> remedios = this.service.getAllRemedios();
+        return new ResponseEntity<>(remedios, HttpStatus.OK);
+
     }
 }

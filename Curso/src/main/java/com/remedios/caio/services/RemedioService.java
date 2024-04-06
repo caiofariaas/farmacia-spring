@@ -6,6 +6,8 @@ import com.remedios.caio.repositories.RemedioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class RemedioService {
 
@@ -22,5 +24,9 @@ public class RemedioService {
 
     public void save(Remedio remedio){
         this.repository.save(remedio);
+    }
+
+    public List<Remedio> getAllRemedios(){
+        return this.repository.findAll();
     }
 }
