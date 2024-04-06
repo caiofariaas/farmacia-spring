@@ -2,8 +2,10 @@ package com.remedios.caio.controllers;
 
 import com.remedios.caio.dtos.RemedioDTO;
 import com.remedios.caio.entities.Remedio;
-import com.remedios.caio.repositories.RemedioRepository;
+import com.remedios.caio.services.RemedioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,11 +19,13 @@ public class RemedioController {
     // Isso tira a necessidade de declarar um objeto em cada método que desejamos usa-lo
 
     @Autowired
-    private RemedioRepository repository;
+    private RemedioService service;
 
     @PostMapping
-    public void createRemedio(@RequestBody RemedioDTO dados){
+    public ResponseEntity<Remedio> createRemedio(@RequestBody RemedioDTO dados){
 
-        repository.save(new Remedio(dados));
+        Remedio newRemedio =  service.createRemedio(dados);
+
+        return new ResponseEntity<>(newRemedio, HttpStatus.CREATED);
     }
 }
