@@ -6,6 +6,8 @@ import com.remedios.caio.dtos.enums.Via;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -19,8 +21,8 @@ public class Remedio {
     private Long id;
     private String nome;
     private String lote;
-    private Double quantidade;
-    private String validade;
+    private int quantidade;
+    private LocalDate validade;
 
     @Enumerated(EnumType.STRING)
     private Via via;
