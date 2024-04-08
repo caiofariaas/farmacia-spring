@@ -11,6 +11,7 @@ import com.remedios.caio.entities.Remedio;
 import java.time.LocalDate;
 
 public record OutRemedioDTO(
+        Long id,
         String nome,
         Via via,
         String lote,
@@ -19,6 +20,6 @@ public record OutRemedioDTO(
 ) {
 
     public OutRemedioDTO(Remedio remedio) {
-        this(remedio.getNome(), remedio.getVia(), remedio.getLote(), remedio.getLaboratorio(), remedio.getValidade());
+        this(remedio.getId(), remedio.getNome(), remedio.getVia(), remedio.getLote(), remedio.getLaboratorio(), remedio.getValidade());
     }
 }

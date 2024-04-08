@@ -37,11 +37,19 @@ public class RemedioController {
         return new ResponseEntity<>(newRemedio, HttpStatus.CREATED);
     }
 
+    // GetAll
+
     @GetMapping
     public ResponseEntity<List<OutRemedioDTO>> getAllRemedios(){
 
         List<OutRemedioDTO> remedios = this.service.getAllRemedios().stream().map(OutRemedioDTO::new).toList();
 
         return new ResponseEntity<>(remedios, HttpStatus.OK);
+    }
+
+    @PutMapping("/{id}")
+    @Transactional
+    public ResponseEntity<Remedio> atualizarRemedio(@PathVariable Long id, @RequestBody @Valid InRemedioDTO remedio){
+
     }
 }
