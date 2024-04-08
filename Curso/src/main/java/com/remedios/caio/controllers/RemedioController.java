@@ -3,6 +3,7 @@ package com.remedios.caio.controllers;
 import com.remedios.caio.dtos.RemedioDTO;
 import com.remedios.caio.entities.Remedio;
 import com.remedios.caio.services.RemedioService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,8 +21,10 @@ public class RemedioController {
     @Autowired
     private RemedioService service;
 
+    // Valid mostra que os dados precisam estar validados
+
     @PostMapping
-    public ResponseEntity<Remedio> createRemedio(@RequestBody RemedioDTO dados){
+    public ResponseEntity<Remedio> createRemedio(@RequestBody @Valid RemedioDTO dados){
 
         Remedio newRemedio =  service.createRemedio(dados);
 
