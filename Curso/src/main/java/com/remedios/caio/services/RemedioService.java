@@ -1,6 +1,6 @@
 package com.remedios.caio.services;
 
-import com.remedios.caio.dtos.RemedioDTO;
+import com.remedios.caio.dtos.InRemedioDTO;
 import com.remedios.caio.entities.Remedio;
 import com.remedios.caio.repositories.RemedioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ public class RemedioService {
     @Autowired
     private RemedioRepository repository;
 
-    public Remedio createRemedio(RemedioDTO data){
+    public Remedio createRemedio(InRemedioDTO data){
         Remedio remedio = new Remedio(data);
 
         this.save(remedio);

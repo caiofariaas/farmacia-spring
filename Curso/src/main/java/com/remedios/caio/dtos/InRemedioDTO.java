@@ -9,7 +9,7 @@ import jakarta.validation.constraints.NotBlank;
 
 import java.time.LocalDate;
 
-public record RemedioDTO(
+public record InRemedioDTO(
 
         @NotBlank
         String nome,

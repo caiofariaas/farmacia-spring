@@ -1,6 +1,6 @@
 package com.remedios.caio.entities;
 
-import com.remedios.caio.dtos.RemedioDTO;
+import com.remedios.caio.dtos.InRemedioDTO;
 import com.remedios.caio.dtos.enums.Laboratorio;
 import com.remedios.caio.dtos.enums.Via;
 import jakarta.persistence.*;
@@ -29,7 +29,7 @@ public class Remedio {
     @Enumerated(EnumType.STRING)
     private Laboratorio laboratorio;
 
-    public Remedio(RemedioDTO dados) {
+    public Remedio(InRemedioDTO dados) {
         this.nome = dados.nome();
         this.lote = dados.lote();
         this.quantidade = dados.quantidade();;

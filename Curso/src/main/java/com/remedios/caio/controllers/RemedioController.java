@@ -1,8 +1,10 @@
 package com.remedios.caio.controllers;
 
-import com.remedios.caio.dtos.RemedioDTO;
+import com.remedios.caio.dtos.OutRemedioDTO;
+import com.remedios.caio.dtos.InRemedioDTO;
 import com.remedios.caio.entities.Remedio;
 import com.remedios.caio.services.RemedioService;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,8 +25,12 @@ public class RemedioController {
 
     // Valid mostra que os dados precisam estar validados
 
+    // Transactional - Faz com que se caso algum erro acontecer nesta requisição ela reverte toda a alteração feita
+    // evita uma perda de dados indesejada
+
     @PostMapping
-    public ResponseEntity<Remedio> createRemedio(@RequestBody @Valid RemedioDTO dados){
+    @Transactional
+    public ResponseEntity<Remedio> createRemedio(@RequestBody @Valid InRemedioDTO dados){
 
         Remedio newRemedio =  service.createRemedio(dados);
 
@@ -32,10 +38,10 @@ public class RemedioController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Remedio>> getAllRemedios(){
+    public ResponseEntity<List<OutRemedioDTO>> getAllRemedios(){
 
-        List<Remedio> remedios = this.service.getAllRemedios();
+        List<OutRemedioDTO> remedios = this.service.getAllRemedios().stream().map(OutRemedioDTO::new).toList();
+
         return new ResponseEntity<>(remedios, HttpStatus.OK);
-
     }
 }
