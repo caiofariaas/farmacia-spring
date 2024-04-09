@@ -18,7 +18,6 @@ public class DBConfiguration {
     private String username;
     private String password;
 
-
     @Profile("dev")
     @Bean
     public String testDatabaseConnection(){

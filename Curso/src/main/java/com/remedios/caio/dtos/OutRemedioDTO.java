@@ -14,12 +14,11 @@ public record OutRemedioDTO(
         Long id,
         String nome,
         Via via,
-        String lote,
         Laboratorio laboratorio,
         LocalDate validade
 ) {
 
     public OutRemedioDTO(Remedio remedio) {
-        this(remedio.getId(), remedio.getNome(), remedio.getVia(), remedio.getLote(), remedio.getLaboratorio(), remedio.getValidade());
+        this(remedio.getId(), remedio.getNome(), remedio.getVia(), remedio.getLaboratorio(), remedio.getValidade());
     }
 }

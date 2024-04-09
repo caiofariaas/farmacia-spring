@@ -1,6 +1,7 @@
 package com.remedios.caio.entities;
 
 import com.remedios.caio.dtos.InRemedioDTO;
+import com.remedios.caio.dtos.UptRemedioDTO;
 import com.remedios.caio.dtos.enums.Laboratorio;
 import com.remedios.caio.dtos.enums.Via;
 import jakarta.persistence.*;
@@ -36,5 +37,19 @@ public class Remedio {
         this.validade = dados.validade();
         this.via = dados.via();
         this.laboratorio = dados.laboratorio();
+    }
+
+    // Tratar Exceptions
+
+    public void atualizarInfo(UptRemedioDTO dados) {
+        if(!dados.nome().isBlank()){
+            this.nome = dados.nome();
+        }
+        if(dados.via() != null){
+            this.via = dados.via();
+        }
+        if(dados.laboratorio() != null){
+            this.laboratorio = dados.laboratorio();
+        }
     }
 }

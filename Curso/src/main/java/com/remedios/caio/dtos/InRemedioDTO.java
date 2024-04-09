@@ -6,6 +6,7 @@ import com.remedios.caio.dtos.enums.Via;
 import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 
@@ -20,6 +21,7 @@ public record InRemedioDTO(
         @NotBlank
         String lote,
 
+        @NotNull
         int quantidade,
 
         @Future // Indica que não é possivel entrar com uma data anterior a dada atual

@@ -1,6 +1,7 @@
 package com.remedios.caio.services;
 
 import com.remedios.caio.dtos.InRemedioDTO;
+import com.remedios.caio.dtos.UptRemedioDTO;
 import com.remedios.caio.entities.Remedio;
 import com.remedios.caio.repositories.RemedioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,16 +32,13 @@ public class RemedioService {
         return this.repository.findAll();
     }
 
-    // Salva o item no banco!
+    // Salva o ‘item’ no banco!
 
-    public boolean atualizarRemedio(Long id, InRemedioDTO remedio){
+    public Remedio atualizarRemedio(Long id, UptRemedioDTO dados){
+        Remedio remedio =  repository.getReferenceById(id);
+        remedio.atualizarInfo(dados);
 
-        Optional<Remedio> optionalInRemedioDTO = repository.findById(id);
-
-        if(optionalInRemedioDTO.isPresent()){
-            Remedio remedio1 = optionalInRemedioDTO.get();
-            remedio1.setNome();
-        }
+        return remedio;
     }
 
     public void save(Remedio remedio){

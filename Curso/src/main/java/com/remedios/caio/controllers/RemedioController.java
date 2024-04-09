@@ -2,6 +2,7 @@ package com.remedios.caio.controllers;
 
 import com.remedios.caio.dtos.OutRemedioDTO;
 import com.remedios.caio.dtos.InRemedioDTO;
+import com.remedios.caio.dtos.UptRemedioDTO;
 import com.remedios.caio.entities.Remedio;
 import com.remedios.caio.services.RemedioService;
 import jakarta.transaction.Transactional;
@@ -47,9 +48,10 @@ public class RemedioController {
         return new ResponseEntity<>(remedios, HttpStatus.OK);
     }
 
-    @PutMapping("/{id}")
+    @PatchMapping("/{id}")
     @Transactional
-    public ResponseEntity<Remedio> atualizarRemedio(@PathVariable Long id, @RequestBody @Valid InRemedioDTO remedio){
+    public OutRemedioDTO atualizarRemedio(@PathVariable Long id, @RequestBody @Valid UptRemedioDTO dados){
 
+        return new OutRemedioDTO(service.atualizarRemedio(id, dados));
     }
 }
