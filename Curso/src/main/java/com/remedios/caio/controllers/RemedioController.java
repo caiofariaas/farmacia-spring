@@ -59,7 +59,7 @@ public class RemedioController {
 
     @DeleteMapping("/{id}")
     @Transactional
-    public void delete(@PathVariable Long id){
-        service.deletar(id);
+    public ResponseEntity<OutRemedioDTO> delete(@PathVariable Long id){
+        return new ResponseEntity<>(service.deletar(id), HttpStatus.NO_CONTENT);
     }
 }

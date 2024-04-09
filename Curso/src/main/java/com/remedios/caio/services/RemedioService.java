@@ -50,7 +50,10 @@ public class RemedioService {
         return  new OutRemedioDTO(remedio);
     }
 
-    public void deletar(Long id){
+    public OutRemedioDTO deletar(Long id){
+        Remedio remedio = repository.getReferenceById(id);
         repository.deleteById(id);
+
+        return new OutRemedioDTO(remedio);
     }
 }
