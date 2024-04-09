@@ -8,7 +8,6 @@ import com.remedios.caio.entities.Remedio;
 import com.remedios.caio.repositories.RemedioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 

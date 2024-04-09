@@ -36,10 +36,6 @@ public class RemedioController {
 
         RemedioDTO remedio =  service.create(dados);
 
-        // Aqui estamos retornando a Location do objeto criado no header no método
-
-        // TODO Perguntar Leo
-
         var uri = uriBuilder.path("/remedios/{id}").buildAndExpand(remedio.id()).toUri();
 
         return ResponseEntity.created(uri).body(remedio);
