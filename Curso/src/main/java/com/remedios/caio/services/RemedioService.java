@@ -2,11 +2,13 @@ package com.remedios.caio.services;
 
 import com.remedios.caio.dtos.InRemedioDTO;
 import com.remedios.caio.dtos.OutRemedioDTO;
+import com.remedios.caio.dtos.RemedioDTO;
 import com.remedios.caio.dtos.UptRemedioDTO;
 import com.remedios.caio.entities.Remedio;
 import com.remedios.caio.repositories.RemedioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 
@@ -17,12 +19,12 @@ public class RemedioService {
     private RemedioRepository repository;
 
 
-    public OutRemedioDTO create(InRemedioDTO data){
+    public RemedioDTO create(InRemedioDTO data){
         Remedio remedio = new Remedio(data);
 
         this.repository.save(remedio);
 
-        return new OutRemedioDTO(remedio);
+        return new RemedioDTO(remedio);
     }
 
     public List<OutRemedioDTO> getAll(){
@@ -30,29 +32,35 @@ public class RemedioService {
     }
 
     public OutRemedioDTO atualizar(Long id, UptRemedioDTO dados){
-        Remedio remedio =  repository.getReferenceById(id);
+        Remedio remedio =  this.repository.getReferenceById(id);
         remedio.atualizarInfo(dados);
 
         return new OutRemedioDTO(remedio);
     }
 
     public OutRemedioDTO inativar(Long id){
-        Remedio remedio = repository.getReferenceById(id);
+        Remedio remedio = this.repository.getReferenceById(id);
         remedio.setAtivo(false);
 
         return new OutRemedioDTO(remedio);
     }
 
     public OutRemedioDTO ativar(Long id){
-        Remedio remedio = repository.getReferenceById(id);
+        Remedio remedio = this.repository.getReferenceById(id);
         remedio.setAtivo(true);
 
         return  new OutRemedioDTO(remedio);
     }
 
+    public RemedioDTO detalhar(Long id){
+        Remedio remedio = this.repository.getReferenceById(id);
+
+        return new RemedioDTO(remedio);
+    }
+
     public OutRemedioDTO deletar(Long id){
-        Remedio remedio = repository.getReferenceById(id);
-        repository.deleteById(id);
+        Remedio remedio = this.repository.getReferenceById(id);
+        this.repository.deleteById(id);
 
         return new OutRemedioDTO(remedio);
     }

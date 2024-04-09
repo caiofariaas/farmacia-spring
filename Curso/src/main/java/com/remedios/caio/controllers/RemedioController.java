@@ -2,6 +2,7 @@ package com.remedios.caio.controllers;
 
 import com.remedios.caio.dtos.InRemedioDTO;
 import com.remedios.caio.dtos.OutRemedioDTO;
+import com.remedios.caio.dtos.RemedioDTO;
 import com.remedios.caio.dtos.UptRemedioDTO;
 import com.remedios.caio.services.RemedioService;
 import jakarta.transaction.Transactional;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 
@@ -30,8 +32,17 @@ public class RemedioController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<OutRemedioDTO> create(@RequestBody @Valid InRemedioDTO dados){
-        return new ResponseEntity<>(service.create(dados) , HttpStatus.CREATED);
+    public ResponseEntity<RemedioDTO> create(@RequestBody @Valid InRemedioDTO dados, UriComponentsBuilder uriBuilder){
+
+        RemedioDTO remedio =  service.create(dados);
+
+        // Aqui estamos retornando a Location do objeto criado no header no método
+
+        // TODO Perguntar Leo
+
+        var uri = uriBuilder.path("/remedios/{id}").buildAndExpand(remedio.id()).toUri();
+
+        return ResponseEntity.created(uri).body(remedio);
     }
 
     @GetMapping
@@ -39,10 +50,21 @@ public class RemedioController {
         return new ResponseEntity<>(service.getAll(), HttpStatus.OK);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<RemedioDTO>detalhar(@PathVariable Long id){
+        return new ResponseEntity<>(service.detalhar(id), HttpStatus.OK);
+    }
+
     @PatchMapping("/{id}")
     @Transactional
     public ResponseEntity<OutRemedioDTO> atualizar(@PathVariable Long id, @RequestBody @Valid UptRemedioDTO dados){
         return new ResponseEntity<>(service.atualizar(id, dados), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity<OutRemedioDTO> delete(@PathVariable Long id){
+        return new ResponseEntity<>(service.deletar(id), HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping("/inativar/{id}")
@@ -55,11 +77,5 @@ public class RemedioController {
     @Transactional
     public ResponseEntity<OutRemedioDTO> ativar(@PathVariable Long id){
         return new ResponseEntity<>(service.ativar(id), HttpStatus.OK);
-    }
-
-    @DeleteMapping("/{id}")
-    @Transactional
-    public ResponseEntity<OutRemedioDTO> delete(@PathVariable Long id){
-        return new ResponseEntity<>(service.deletar(id), HttpStatus.NO_CONTENT);
     }
 }
