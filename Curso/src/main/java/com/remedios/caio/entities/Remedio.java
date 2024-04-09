@@ -24,11 +24,12 @@ public class Remedio {
     private String lote;
     private int quantidade;
     private LocalDate validade;
-
+    private Boolean ativo;
     @Enumerated(EnumType.STRING)
     private Via via;
     @Enumerated(EnumType.STRING)
     private Laboratorio laboratorio;
+
 
     public Remedio(InRemedioDTO dados) {
         this.nome = dados.nome();
@@ -37,10 +38,10 @@ public class Remedio {
         this.validade = dados.validade();
         this.via = dados.via();
         this.laboratorio = dados.laboratorio();
+        this.ativo = true;
     }
 
-    // Tratar Exceptions
-
+    // TODO Tratar Exceptions
     public void atualizarInfo(UptRemedioDTO dados) {
         if(!dados.nome().isBlank()){
             this.nome = dados.nome();

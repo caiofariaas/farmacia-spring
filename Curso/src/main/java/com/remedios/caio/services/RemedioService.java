@@ -1,6 +1,7 @@
 package com.remedios.caio.services;
 
 import com.remedios.caio.dtos.InRemedioDTO;
+import com.remedios.caio.dtos.OutRemedioDTO;
 import com.remedios.caio.dtos.UptRemedioDTO;
 import com.remedios.caio.entities.Remedio;
 import com.remedios.caio.repositories.RemedioRepository;
@@ -8,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class RemedioService {
@@ -16,32 +16,34 @@ public class RemedioService {
     @Autowired
     private RemedioRepository repository;
 
-    // Create Remedio
 
-    public Remedio createRemedio(InRemedioDTO data){
+    public OutRemedioDTO create(InRemedioDTO data){
         Remedio remedio = new Remedio(data);
 
-        this.save(remedio);
+        this.repository.save(remedio);
 
-        return remedio;
+        return new OutRemedioDTO(remedio);
     }
 
-    // Retorna todos os Remedios!
-
-    public List<Remedio> getAllRemedios(){
-        return this.repository.findAll();
+    public List<OutRemedioDTO> getAll(){
+        return this.repository.findAll().stream().map(OutRemedioDTO::new).toList();
     }
 
-    // Salva o ‘item’ no banco!
-
-    public Remedio atualizarRemedio(Long id, UptRemedioDTO dados){
+    public OutRemedioDTO atualizar(Long id, UptRemedioDTO dados){
         Remedio remedio =  repository.getReferenceById(id);
         remedio.atualizarInfo(dados);
 
-        return remedio;
+        return new OutRemedioDTO(remedio);
     }
 
-    public void save(Remedio remedio){
-        this.repository.save(remedio);
+    public OutRemedioDTO inativar(Long id){
+        Remedio remedio = repository.getReferenceById(id);
+        remedio.setAtivo(false);
+
+        return new OutRemedioDTO(remedio);
+    }
+
+    public void deletar(Long id){
+        repository.deleteById(id);
     }
 }

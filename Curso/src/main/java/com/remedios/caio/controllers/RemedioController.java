@@ -1,9 +1,8 @@
 package com.remedios.caio.controllers;
 
-import com.remedios.caio.dtos.OutRemedioDTO;
 import com.remedios.caio.dtos.InRemedioDTO;
+import com.remedios.caio.dtos.OutRemedioDTO;
 import com.remedios.caio.dtos.UptRemedioDTO;
-import com.remedios.caio.entities.Remedio;
 import com.remedios.caio.services.RemedioService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -31,27 +30,30 @@ public class RemedioController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<Remedio> createRemedio(@RequestBody @Valid InRemedioDTO dados){
-
-        Remedio newRemedio =  service.createRemedio(dados);
-
-        return new ResponseEntity<>(newRemedio, HttpStatus.CREATED);
+    public ResponseEntity<OutRemedioDTO> create(@RequestBody @Valid InRemedioDTO dados){
+        return new ResponseEntity<>(service.create(dados) , HttpStatus.CREATED);
     }
 
-    // GetAll
-
     @GetMapping
-    public ResponseEntity<List<OutRemedioDTO>> getAllRemedios(){
-
-        List<OutRemedioDTO> remedios = this.service.getAllRemedios().stream().map(OutRemedioDTO::new).toList();
-
-        return new ResponseEntity<>(remedios, HttpStatus.OK);
+    public ResponseEntity<List<OutRemedioDTO>> getAll(){
+        return new ResponseEntity<>(service.getAll(), HttpStatus.OK);
     }
 
     @PatchMapping("/{id}")
     @Transactional
-    public OutRemedioDTO atualizarRemedio(@PathVariable Long id, @RequestBody @Valid UptRemedioDTO dados){
+    public ResponseEntity<OutRemedioDTO> atualizar(@PathVariable Long id, @RequestBody @Valid UptRemedioDTO dados){
+        return new ResponseEntity<>(service.atualizar(id, dados), HttpStatus.OK);
+    }
 
-        return new OutRemedioDTO(service.atualizarRemedio(id, dados));
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity<OutRemedioDTO> inativar(@PathVariable Long id){
+        return new ResponseEntity<>(service.inativar(id), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/excluir/{id}")
+    @Transactional
+    public void delete(@PathVariable Long id){
+        service.deletar(id);
     }
 }
