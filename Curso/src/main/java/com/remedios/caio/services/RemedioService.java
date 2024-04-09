@@ -26,7 +26,7 @@ public class RemedioService {
     }
 
     public List<OutRemedioDTO> getAll(){
-        return this.repository.findAll().stream().map(OutRemedioDTO::new).toList();
+        return this.repository.findAllByAtivoTrue().stream().map(OutRemedioDTO::new).toList();
     }
 
     public OutRemedioDTO atualizar(Long id, UptRemedioDTO dados){
@@ -41,6 +41,13 @@ public class RemedioService {
         remedio.setAtivo(false);
 
         return new OutRemedioDTO(remedio);
+    }
+
+    public OutRemedioDTO ativar(Long id){
+        Remedio remedio = repository.getReferenceById(id);
+        remedio.setAtivo(true);
+
+        return  new OutRemedioDTO(remedio);
     }
 
     public void deletar(Long id){

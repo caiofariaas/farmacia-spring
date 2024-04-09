@@ -45,13 +45,19 @@ public class RemedioController {
         return new ResponseEntity<>(service.atualizar(id, dados), HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/inativar/{id}")
     @Transactional
     public ResponseEntity<OutRemedioDTO> inativar(@PathVariable Long id){
         return new ResponseEntity<>(service.inativar(id), HttpStatus.OK);
     }
 
-    @DeleteMapping("/excluir/{id}")
+    @PutMapping("/ativar/{id}")
+    @Transactional
+    public ResponseEntity<OutRemedioDTO> ativar(@PathVariable Long id){
+        return new ResponseEntity<>(service.ativar(id), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
     @Transactional
     public void delete(@PathVariable Long id){
         service.deletar(id);
