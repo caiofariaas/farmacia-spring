@@ -5,6 +5,7 @@ import com.remedios.caio.dtos.OutRemedioDTO;
 import com.remedios.caio.dtos.RemedioDTO;
 import com.remedios.caio.dtos.UptRemedioDTO;
 import com.remedios.caio.entities.Remedio;
+import com.remedios.caio.exceptions.NotFoundException;
 import com.remedios.caio.repositories.RemedioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,7 +54,6 @@ public class RemedioService {
 
     public RemedioDTO detalhar(Long id){
         Remedio remedio = this.repository.getReferenceById(id);
-
         return new RemedioDTO(remedio);
     }
 
