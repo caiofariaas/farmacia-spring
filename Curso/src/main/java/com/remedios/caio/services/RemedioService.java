@@ -51,8 +51,7 @@ public class RemedioService {
     }
 
     public RemedioDTO detalhar(Long id){
-        Remedio remedio = this.repository.findById(id).orElseThrow(() -> new NotFoundException("Medicine not found!"));
-        return new RemedioDTO(remedio);
+        return new RemedioDTO(this.repository.findById(id).orElseThrow(() -> new NotFoundException("Medicine not found!")));
     }
 
     public OutRemedioDTO deletar(Long id){
