@@ -18,7 +18,6 @@ public class RemedioService {
     @Autowired
     private RemedioRepository repository;
 
-
     public RemedioDTO create(InRemedioDTO data){
         Remedio remedio = new Remedio(data);
         this.repository.save(remedio);

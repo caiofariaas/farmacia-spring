@@ -17,10 +17,14 @@ public class GlobalControllerAdvice {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ResponseBody
     public ResponseEntity<Object> handleNotFoundException(Exception e) {
-
         Map<String, Object> body = new HashMap<String, Object>();
         body.put("message", e.getMessage());
 
         return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseBody
+    public ResponseEntity<Object> handle
 }
