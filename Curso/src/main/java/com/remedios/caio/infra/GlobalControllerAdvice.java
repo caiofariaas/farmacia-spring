@@ -13,27 +13,27 @@ import java.util.NoSuchElementException;
 @RestControllerAdvice
 public class GlobalControllerAdvice {
 
-//    @ExceptionHandler(NotFoundException.class)
-//    @ResponseStatus(HttpStatus.NOT_FOUND)
-//    @ResponseBody
-//    public ResponseEntity<Object> handleNotFoundException(Exception e) {
-//        Map<String, Object> body = new HashMap<String, Object>();
-//        body.put("message", e.getMessage());
-//
-//        return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
-//    }
+    @ExceptionHandler(NotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseBody
+    public ResponseEntity<Object> handleNotFoundException(Exception e) {
+        Map<String, Object> body = new HashMap<String, Object>();
+        body.put("message", e.getMessage());
+
+        return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
+    }
 
 
     // Tratamento de exceções para Recurso não encontrado!
     
-
-    @ExceptionHandler(EntityNotFoundException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ResponseBody
-    public ResponseEntity<Object> handleEntityNotFound(Exception e){
-        Map<String, Object> body = new HashMap<String, Object>();
-        body.put("message", "Resource not found!");
-
-        return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
-    }
+//
+//    @ExceptionHandler(EntityNotFoundException.class)
+//    @ResponseStatus(HttpStatus.NOT_FOUND)
+//    @ResponseBody
+//    public ResponseEntity<Object> handleEntityNotFound(Exception e){
+//        Map<String, Object> body = new HashMap<String, Object>();
+//        body.put("message", "Resource not found!");
+//
+//        return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
+//    }
 }
