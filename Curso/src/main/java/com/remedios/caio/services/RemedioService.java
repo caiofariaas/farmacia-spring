@@ -21,7 +21,6 @@ public class RemedioService {
 
     public RemedioDTO create(InRemedioDTO data){
         Remedio remedio = new Remedio(data);
-
         this.repository.save(remedio);
 
         return new RemedioDTO(remedio);
@@ -32,33 +31,34 @@ public class RemedioService {
     }
 
     public OutRemedioDTO atualizar(Long id, UptRemedioDTO dados){
-        Remedio remedio =  this.repository.getReferenceById(id);
+        Remedio remedio = this.repository.findById(id).orElseThrow(() -> new NotFoundException("Medicine not found!"));
         remedio.atualizarInfo(dados);
 
         return new OutRemedioDTO(remedio);
     }
 
     public OutRemedioDTO inativar(Long id){
-        Remedio remedio = this.repository.getReferenceById(id);
+        Remedio remedio = this.repository.findById(id).orElseThrow(() -> new NotFoundException("Medicine not found!"));
         remedio.setAtivo(false);
 
         return new OutRemedioDTO(remedio);
     }
 
     public OutRemedioDTO ativar(Long id){
-        Remedio remedio = this.repository.getReferenceById(id);
+        Remedio remedio = this.repository.findById(id).orElseThrow(() -> new NotFoundException("Medicine not found!"));
         remedio.setAtivo(true);
 
         return  new OutRemedioDTO(remedio);
     }
 
     public RemedioDTO detalhar(Long id){
-        Remedio remedio = this.repository.getReferenceById(id);
+        Remedio remedio = this.repository.findById(id).orElseThrow(() -> new NotFoundException("Medicine not found!"));
         return new RemedioDTO(remedio);
+
     }
 
     public OutRemedioDTO deletar(Long id){
-        Remedio remedio = this.repository.getReferenceById(id);
+        Remedio remedio = this.repository.findById(id).orElseThrow(() -> new NotFoundException("Medicine not found!"));
         this.repository.deleteById(id);
 
         return new OutRemedioDTO(remedio);

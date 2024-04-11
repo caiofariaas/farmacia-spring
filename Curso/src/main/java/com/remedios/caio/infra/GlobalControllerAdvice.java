@@ -19,10 +19,8 @@ public class GlobalControllerAdvice {
     public ResponseEntity<Object> handleNotFoundException(Exception e) {
 
         Map<String, Object> body = new HashMap<String, Object>();
-
-        body.put("message", "Medicine not found!");
+        body.put("message", e.getMessage());
 
         return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
     }
-
 }
