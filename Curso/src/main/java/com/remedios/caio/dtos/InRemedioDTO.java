@@ -13,7 +13,7 @@ import java.time.LocalDate;
 
 public record InRemedioDTO(
 
-        @NotBlank
+        @NotBlank(message = "message: Bad request")
         String nome,
 
         @Enumerated

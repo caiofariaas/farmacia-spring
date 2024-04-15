@@ -2,7 +2,6 @@ package com.remedios.caio.infra;
 
 import com.remedios.caio.exceptions.ArgumentNotValidException;
 import com.remedios.caio.exceptions.NotFoundException;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.NoSuchElementException;
 
 @RestControllerAdvice
 public class GlobalControllerAdvice {
@@ -25,18 +23,16 @@ public class GlobalControllerAdvice {
         return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(ArgumentNotValidException.class)
+    @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<?> tratador400(Exception e){
         Map<String, Object> body = new HashMap<>();
 
-        body.put("message", "" + e.getClass());
+        body.put("message", "Bad request");
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
 
-
     // Tratamento de exceções para Recurso não encontrado!
-    
-//
+
 //    @ExceptionHandler(EntityNotFoundException.class)
 //    @ResponseStatus(HttpStatus.NOT_FOUND)
 //    @ResponseBody
