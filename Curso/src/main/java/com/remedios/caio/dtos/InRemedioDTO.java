@@ -12,23 +12,17 @@ import jakarta.validation.constraints.Positive;
 import java.time.LocalDate;
 
 public record InRemedioDTO(
-
-        @NotBlank(message = "message: Bad request")
+        @NotBlank
         String nome,
-
         @Enumerated
         Via via,
-
         @NotBlank
         String lote,
-
         @Positive
         @NotNull
         int quantidade,
-
         @Future // Indica que não é possivel entrar com uma data anterior a dada atual
         LocalDate validade,
-
         @Enumerated
         Laboratorio laboratorio) {
 }
