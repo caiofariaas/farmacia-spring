@@ -1,9 +1,11 @@
 package com.remedios.caio.infra;
 
+import com.remedios.caio.exceptions.ArgumentNotValidException;
 import com.remedios.caio.exceptions.NotFoundException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -21,6 +23,14 @@ public class GlobalControllerAdvice {
         body.put("message", e.getMessage());
 
         return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(ArgumentNotValidException.class)
+    public ResponseEntity<?> tratador400(Exception e){
+        Map<String, Object> body = new HashMap<>();
+
+        body.put("message", "" + e.getClass());
+        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
 
 

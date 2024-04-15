@@ -20,6 +20,7 @@ public class RemedioService {
 
     public RemedioDTO create(InRemedioDTO data){
         Remedio remedio = new Remedio(data);
+
         this.repository.save(remedio);
 
         return new RemedioDTO(remedio);
