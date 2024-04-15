@@ -19,9 +19,6 @@ import java.util.List;
 @RequestMapping("/remedios")
 public class RemedioController {
 
-    // O Autowired instancia um objeto da classe indicada
-    // Isso tira a necessidade de declarar um objeto em cada método que desejamos usa-lo
-
     @Autowired
     private RemedioService service;
 

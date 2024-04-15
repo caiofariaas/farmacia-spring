@@ -24,11 +24,10 @@ public class GlobalControllerAdvice {
         return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
     }
 
-
     // Perguntar se deixo como VAR ou se altero para a instancia da classe
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<?> tratador400(MethodArgumentNotValidException e){
+    public ResponseEntity<?> handleArgumentNotValidException (MethodArgumentNotValidException e){
         var erros = e.getFieldErrors();
 
         var body = Map.of("message", erros.stream().map(ExceptionDTO::new).collect(Collectors.toList()));
@@ -36,16 +35,15 @@ public class GlobalControllerAdvice {
         return ResponseEntity.badRequest().body(body);
     }
 
+//    @ExceptionHandler(MethodArgumentNotValidException.class)
+//    public ResponseEntity<?> handleArgumentNotValidException(MethodArgumentNotValidException e){
+//        List<FieldError> erros = e.getFieldErrors();
+//
+//        Map<String, Object> body = new HashMap<>();
+//        body.put("message", erros.stream().map(ExceptionDTO::new).collect(Collectors.toList()));
+//
+//        return ResponseEntity.badRequest().body(body);
+//    }
 
     // Tratamento de exceções para Recurso não encontrado!
-
-//    @ExceptionHandler(EntityNotFoundException.class)
-//    @ResponseStatus(HttpStatus.NOT_FOUND)
-//    @ResponseBody
-//    public ResponseEntity<Object> handleEntityNotFound(Exception e){
-//        Map<String, Object> body = new HashMap<String, Object>();
-//        body.put("message", "Resource not found!");
-//
-//        return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
-//    }
 }
