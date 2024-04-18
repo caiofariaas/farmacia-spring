@@ -14,7 +14,7 @@ public class AuthenticationService implements UserDetailsService {
 
 
     // Este método é utilizado para carregar os detalhes do usuário a partir de um nome de usuário fornecido.
-    //
+
 
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
