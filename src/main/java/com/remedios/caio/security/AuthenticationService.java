@@ -1,10 +1,13 @@
-package com.remedios.caio.services;
+package com.remedios.caio.security;
 
+import com.remedios.caio.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+// Criar ABA Security
 
 @Service
 public class AuthenticationService implements UserDetailsService {
@@ -18,4 +21,6 @@ public class AuthenticationService implements UserDetailsService {
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
         return service.getByLogin(login);
     }
+
+
 }

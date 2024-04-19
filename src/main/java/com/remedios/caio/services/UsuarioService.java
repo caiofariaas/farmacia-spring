@@ -1,6 +1,5 @@
 package com.remedios.caio.services;
 
-import com.remedios.caio.entities.Usuario;
 import com.remedios.caio.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

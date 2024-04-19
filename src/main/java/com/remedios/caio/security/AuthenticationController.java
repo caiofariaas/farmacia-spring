@@ -1,4 +1,4 @@
-package com.remedios.caio.controllers;
+package com.remedios.caio.security;
 
 import com.remedios.caio.dtos.auth.AuthenticationDTO;
 import jakarta.validation.Valid;
