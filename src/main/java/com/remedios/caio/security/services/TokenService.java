@@ -1,4 +1,4 @@
-package com.remedios.caio.security;
+package com.remedios.caio.security.services;
 
 
 import com.auth0.jwt.JWT;
@@ -23,24 +23,22 @@ public class TokenService {
 
     public String gerarToken(Usuario usuario){
         try {
-
-            var algorithm = Algorithm.HMAC256(secret);
             return JWT.create()
                     .withIssuer("remedios_api")
                     .withSubject(usuario.getLogin())
-//                    .withClaim("id", usuario.getId())
-                    .withExpiresAt(dataExpirar())
-                    .sign(algorithm);
-
+                    .withExpiresAt(Expirar())
+                    .sign(Algorithm.HMAC256(secret));
         } catch (JWTCreationException e){
             throw new RuntimeException("Erro ao gerar Token", e);
         }
     }
 
-    private Instant dataExpirar() {
+    // Função que retorna a hora atual mais 2 horas
+    // usada para determinar ciclo de vida do Token
+
+    private Instant Expirar() {
         return LocalDateTime.now()
                 .plusHours(2)
                 .toInstant(ZoneOffset.of("-03:00"));
     }
-
 }

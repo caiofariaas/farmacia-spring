@@ -1,4 +1,4 @@
-package com.remedios.caio.security;
+package com.remedios.caio.security.services;
 
 import com.remedios.caio.entities.Usuario;
 import com.remedios.caio.security.dtos.AuthenticationDTO;
@@ -13,10 +13,8 @@ public class AuthService {
 
     @Autowired
     private TokenService tokenService;
-
     @Autowired
     private AuthenticationManager manager;
-
 
     public TokenJwtDTO loginAndCreateToken(AuthenticationDTO dados){
 
@@ -24,6 +22,4 @@ public class AuthService {
 
         return new TokenJwtDTO(tokenService.gerarToken((Usuario)authentication.getPrincipal()));
     }
-
-
 }

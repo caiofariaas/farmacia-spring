@@ -2,6 +2,7 @@ package com.remedios.caio.security;
 
 import com.remedios.caio.security.dtos.AuthenticationDTO;
 import com.remedios.caio.security.dtos.TokenJwtDTO;
+import com.remedios.caio.security.services.AuthService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,5 +22,4 @@ public class AuthenticationController {
     public ResponseEntity<TokenJwtDTO> login(@RequestBody @Valid AuthenticationDTO dados){
         return ResponseEntity.ok(authService.loginAndCreateToken(dados));
     }
-
 }
