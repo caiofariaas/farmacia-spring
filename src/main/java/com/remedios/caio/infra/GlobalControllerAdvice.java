@@ -29,10 +29,7 @@ public class GlobalControllerAdvice {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<?> handleArgumentNotValidException (MethodArgumentNotValidException e){
-        var erros = e.getFieldErrors();
-
-        var body = Map.of("message", erros.stream().map(ExceptionDTO::new).collect(Collectors.toList()));
-
-        return ResponseEntity.badRequest().body(body);
+        return ResponseEntity.badRequest().body(Map.of("message",
+                e.getFieldErrors().stream().map(ExceptionDTO::new).collect(Collectors.toList())));
     }
 }
