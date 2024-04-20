@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 // Criar ABA Security
 
 @Service
-public class AuthenticationService implements UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
     private UsuarioService service;
@@ -21,9 +21,5 @@ public class AuthenticationService implements UserDetailsService {
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
         return service.getByLogin(login);
     }
-
-
-    
-
 
 }
