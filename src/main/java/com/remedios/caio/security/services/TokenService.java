@@ -24,13 +24,19 @@ public class TokenService {
     private String secret;
 
     public String gerarToken(Usuario usuario) throws JWTCreationException{
-        return JWT
-                .create()
-                .withIssuer("remedios_api")
-                .withSubject(usuario.getLogin())
-                .withClaim("id", usuario.getId())
-                .withExpiresAt(Expirar())
-                .sign(Algorithm.HMAC256(secret));
+
+        try {
+            return JWT
+                    .create()
+                    .withIssuer("remedios_api")
+                    .withSubject(usuario.getLogin())
+                    .withClaim("id", usuario.getId())
+                    .withExpiresAt(Expirar())
+                    .sign(Algorithm.HMAC256(secret));
+        }
+        catch (JWTCreationException exception){
+            throw new RuntimeException("Erro ao gerar o token", exception);
+        }
     }
 
     public String getSubject(String tokenJWT) throws JWTCreationException{
