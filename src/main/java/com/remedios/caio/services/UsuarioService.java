@@ -13,11 +13,7 @@ public class UsuarioService {
 
     // USER DETAILS
 
-    // TODO
-    //  VERIFICAR NECESSIDADE DE DTO
-
     public UserDetails getByLogin(String login){
         return repository.findByLogin(login);
     }
-
 }
