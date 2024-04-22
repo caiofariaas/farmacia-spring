@@ -1,4 +1,4 @@
-package com.remedios.caio.security;
+package com.remedios.caio.security.services;
 
 import com.remedios.caio.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
