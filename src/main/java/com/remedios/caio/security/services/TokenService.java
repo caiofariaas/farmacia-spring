@@ -43,6 +43,7 @@ public class TokenService {
             logger.error("Erro ao gerar o token!", e);
             throw new RuntimeException("Erro ao gerar o token", e);
         }
+
     }
 
     public String getSubject(String tokenJWT) throws JWTCreationException, JWTDecodeException{
@@ -56,12 +57,10 @@ public class TokenService {
                     .getSubject();
         }
         catch (JWTDecodeException e){
-
             logger.error("Token Inválido!");
             throw new TokenException("Token Inválido!");
         }
         catch (JWTVerificationException e){
-
             logger.error("Erro ao verificar o Token!", e);
             throw new TokenException("Erro ao verificar o Token!");
         }

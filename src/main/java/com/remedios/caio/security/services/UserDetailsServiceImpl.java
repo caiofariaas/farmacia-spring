@@ -2,6 +2,7 @@ package com.remedios.caio.security.services;
 
 import com.remedios.caio.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -37,6 +38,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-        return service.getByLogin(login);
+
+        var usuario = service.getByLogin(login);
+
+        if(usuario != null){
+            return usuario;
+        }
+        throw new BadCredentialsException("Usuário inexistente ou senha inválida");
     }
 }
