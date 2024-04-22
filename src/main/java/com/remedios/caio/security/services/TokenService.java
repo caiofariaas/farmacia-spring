@@ -2,11 +2,14 @@ package com.remedios.caio.security.services;
 
 
 import com.auth0.jwt.JWT;
-import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
+import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.remedios.caio.entities.Usuario;
+import com.remedios.caio.exceptions.TokenException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +26,8 @@ public class TokenService {
     @Value("${api.security.token.secret}")
     private String secret;
 
+    private static final Logger logger = LoggerFactory.getLogger(TokenService.class);
+
     public String gerarToken(Usuario usuario) throws JWTCreationException{
 
         try {
@@ -34,18 +39,32 @@ public class TokenService {
                     .withExpiresAt(Expirar())
                     .sign(Algorithm.HMAC256(secret));
         }
-        catch (JWTCreationException exception){
-            throw new RuntimeException("Erro ao gerar o token", exception);
+        catch (JWTCreationException e){
+            logger.error("Erro ao gerar o token!", e);
+            throw new RuntimeException("Erro ao gerar o token", e);
         }
     }
 
-    public String getSubject(String tokenJWT) throws JWTCreationException{
-        return JWT
-                .require(Algorithm.HMAC256(secret))
-                .withIssuer("remedios_api")
-                .build()
-                .verify(tokenJWT)
-                .getSubject();
+    public String getSubject(String tokenJWT) throws JWTCreationException, JWTDecodeException{
+
+        try {
+            return JWT
+                    .require(Algorithm.HMAC256(secret))
+                    .withIssuer("remedios_api")
+                    .build()
+                    .verify(tokenJWT)
+                    .getSubject();
+        }
+        catch (JWTDecodeException e){
+
+            logger.error("Token Inválido!");
+            throw new TokenException("Token Inválido!");
+        }
+        catch (JWTVerificationException e){
+
+            logger.error("Erro ao verificar o Token!", e);
+            throw new TokenException("Erro ao verificar o Token!");
+        }
     }
 
     // Função que retorna a hora atual mais 2 horas
