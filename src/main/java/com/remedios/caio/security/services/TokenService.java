@@ -2,8 +2,10 @@ package com.remedios.caio.security.services;
 
 
 import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
+import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.remedios.caio.entities.Usuario;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -21,16 +23,23 @@ public class TokenService {
     @Value("${api.security.token.secret}")
     private String secret;
 
-    public String gerarToken(Usuario usuario){
-        try {
-            return JWT.create()
-                    .withIssuer("remedios_api")
-                    .withSubject(usuario.getLogin())
-                    .withExpiresAt(Expirar())
-                    .sign(Algorithm.HMAC256(secret));
-        } catch (JWTCreationException e){
-            throw new RuntimeException("Erro ao gerar Token", e);
-        }
+    public String gerarToken(Usuario usuario) throws JWTCreationException{
+        return JWT
+                .create()
+                .withIssuer("remedios_api")
+                .withSubject(usuario.getLogin())
+                .withClaim("id", usuario.getId())
+                .withExpiresAt(Expirar())
+                .sign(Algorithm.HMAC256(secret));
+    }
+
+    public String getSubject(String tokenJWT) throws JWTCreationException{
+        return JWT
+                .require(Algorithm.HMAC256(secret))
+                .withIssuer("remedios_api")
+                .build()
+                .verify(tokenJWT)
+                .getSubject();
     }
 
     // Função que retorna a hora atual mais 2 horas
