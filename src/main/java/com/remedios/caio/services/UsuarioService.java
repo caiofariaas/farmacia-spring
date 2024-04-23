@@ -19,11 +19,11 @@ public class UsuarioService {
 
         UserDetails user = repository.findByLogin(login);
 
-        if(user != null){
-            System.out.println("USUARIO SERVICE - " + user.getUsername());
-            return user;
+        if(user == null){
+            throw new BadCredentialsException("Usuário inexistente ou senha inválida");
         }
 
-        throw new BadCredentialsException("Usuário inexistente ou senha inválida");
+        System.out.println("USUARIO SERVICE - " + user.getUsername());
+        return user;
     }
 }

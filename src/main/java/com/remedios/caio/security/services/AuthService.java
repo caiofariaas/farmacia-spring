@@ -19,11 +19,10 @@ public class AuthService {
     @Autowired
     private AuthenticationManager manager;
 
-    // TRATAR EXCEÇÕES
 
     public TokenJwtDTO loginAndCreateToken(AuthenticationDTO dados){
-        Authentication autenticacao = manager.authenticate(new UsernamePasswordAuthenticationToken(dados.login(), dados.senha()));
-        String tokenJWT = tokenService.gerarToken((Usuario) autenticacao.getPrincipal());
+
+        String tokenJWT = tokenService.gerarToken((Usuario) manager.authenticate(new UsernamePasswordAuthenticationToken(dados.login(), dados.senha())).getPrincipal());
 
         return new TokenJwtDTO(tokenJWT);
     }

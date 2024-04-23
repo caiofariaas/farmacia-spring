@@ -6,8 +6,10 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
+import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.remedios.caio.entities.Usuario;
 import com.remedios.caio.exceptions.TokenException;
+import org.antlr.v4.runtime.Token;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -43,7 +45,6 @@ public class TokenService {
             logger.error("Erro ao gerar o token!", e);
             throw new RuntimeException("Erro ao gerar o token", e);
         }
-
     }
 
     public String getSubject(String tokenJWT) throws JWTCreationException, JWTDecodeException{
@@ -60,9 +61,8 @@ public class TokenService {
             logger.error("Token Inválido!");
             throw new TokenException("Token Inválido!");
         }
-        catch (JWTVerificationException e){
-            logger.error("Erro ao verificar o Token!", e);
-            throw new TokenException("Erro ao verificar o Token!");
+        catch (TokenExpiredException e ){
+            throw new TokenExpiredException("Token Expirado!", e.getExpiredOn());
         }
     }
 
