@@ -59,6 +59,7 @@ public class SecurityFilter extends OncePerRequestFilter {
             e isso é armazenado no contexto de segurança da aplicação.
 
              */
+
             SecurityContextHolder
                     .getContext()
                     .setAuthentication(new UsernamePasswordAuthenticationToken(usuario, null, usuario.getAuthorities()));

@@ -19,6 +19,10 @@ public record OutRemedioDTO(
 ) {
 
     public OutRemedioDTO(Remedio remedio) {
-        this(remedio.getId(), remedio.getNome(), remedio.getVia(), remedio.getLaboratorio(), remedio.getValidade());
+        this(remedio.getId(),
+                remedio.getNome(),
+                remedio.getVia(),
+                remedio.getLaboratorio(),
+                remedio.getValidade());
     }
 }
