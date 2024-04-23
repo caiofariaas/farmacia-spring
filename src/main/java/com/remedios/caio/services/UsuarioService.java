@@ -15,6 +15,11 @@ public class UsuarioService {
     // USER DETAILS
 
     public UserDetails getByLogin(String login){
-        return repository.findByLogin(login);
+
+        UserDetails user = repository.findByLogin(login);
+
+        System.out.println("USUARIO SERVICE - " + user.getUsername());
+
+        return user;
     }
 }
