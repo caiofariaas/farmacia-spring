@@ -8,6 +8,8 @@ import com.remedios.caio.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -38,14 +40,8 @@ public class UsuarioService {
         return this.repository.findAllByAtivoTrue().stream().map(OutUsuarioDTO::new).toList();
     }
 
-    public UsuarioDTO create(InUsuarioDTO dados){
-        Usuario usuario = new Usuario(dados);
-
-//        usuario.setSenha(passwordEncoder.encode(usuario.getPassword()));
-
+    public void save(Usuario usuario){
         this.repository.save(usuario);
-
-        return new UsuarioDTO(usuario);
     }
 
 }

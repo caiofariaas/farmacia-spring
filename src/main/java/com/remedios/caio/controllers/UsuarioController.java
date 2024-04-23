@@ -27,13 +27,4 @@ public class UsuarioController {
         return new ResponseEntity<>(service.getAll(), HttpStatus.OK);
     }
 
-    @PostMapping
-    @Transactional
-    public ResponseEntity<UsuarioDTO> create(@RequestBody @Valid InUsuarioDTO dados, UriComponentsBuilder uriBuilder){
-        UsuarioDTO usuario = service.create(dados);
-
-        var uri = uriBuilder.path("/usuarios/{id}").buildAndExpand(usuario.id()).toUri();
-
-        return ResponseEntity.created(uri).body(usuario);
-    }
 }
