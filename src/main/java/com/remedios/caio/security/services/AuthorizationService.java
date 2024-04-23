@@ -22,12 +22,6 @@ public class AuthorizationService {
 
     public void register(InUsuarioDTO dados){
 
-        // ARRUMAR
-
-        if(usuarioService.getByLogin(dados.login()) != null){
-            throw new IllegalArgumentException("Login já utilizado!");
-        }
-
         Usuario usuario = new Usuario(dados, passwordEncoder.encode(dados.senha()));
 
         usuarioService.save(usuario);

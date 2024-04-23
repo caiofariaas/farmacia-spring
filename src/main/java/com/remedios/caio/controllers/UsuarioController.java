@@ -26,5 +26,4 @@ public class UsuarioController {
     public ResponseEntity<List<OutUsuarioDTO>> getAll(){
         return new ResponseEntity<>(service.getAll(), HttpStatus.OK);
     }
-
 }

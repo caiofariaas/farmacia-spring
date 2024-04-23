@@ -41,6 +41,7 @@ public class Usuario implements UserDetails {
     public Usuario(InUsuarioDTO dados, String encrypPassword) {
         this.login = dados.login();
         this.nome = dados.nome();
+        this.ativo = true;
         this.senha = encrypPassword;
     }
 

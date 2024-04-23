@@ -51,4 +51,14 @@ public class GlobalControllerAdvice {
 
         return new ResponseEntity<>(body, HttpStatus.UNAUTHORIZED);
     }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public ResponseEntity<Object> handleIllegalArgumentException(Exception e){
+
+        Map<String, Object> body = new HashMap<String, Object>();
+        body.put("message", e.getMessage());
+
+        return new ResponseEntity<>(body, HttpStatus.UNAUTHORIZED);
+    }
 }
