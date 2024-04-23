@@ -3,6 +3,7 @@ package com.remedios.caio.services;
 import com.remedios.caio.entities.Usuario;
 import com.remedios.caio.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -18,8 +19,11 @@ public class UsuarioService {
 
         UserDetails user = repository.findByLogin(login);
 
-        System.out.println("USUARIO SERVICE - " + user.getUsername());
+        if(user != null){
+            System.out.println("USUARIO SERVICE - " + user.getUsername());
+            return user;
+        }
 
-        return user;
+        throw new BadCredentialsException("Usuário inexistente ou senha inválida");
     }
 }

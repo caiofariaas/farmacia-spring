@@ -1,9 +1,7 @@
 package com.remedios.caio.security.services;
 
-import com.remedios.caio.entities.Usuario;
 import com.remedios.caio.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
