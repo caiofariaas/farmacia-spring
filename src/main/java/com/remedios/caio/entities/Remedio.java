@@ -53,7 +53,4 @@ public class Remedio {
             this.laboratorio = dados.laboratorio();
         }
     }
-
-
-
 }

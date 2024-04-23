@@ -1,5 +1,7 @@
 package com.remedios.caio.entities;
 
+import com.remedios.caio.dtos.usuarios.InUsuarioDTO;
+import com.remedios.caio.repositories.UsuarioRepository;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -22,7 +24,17 @@ public class Usuario implements UserDetails {
     private Long id;
     private String login;
     private String senha;
+    private String nome;
+    private Boolean ativo;
 
+    // Construtor DTO
+
+    public Usuario(InUsuarioDTO dados){
+        this.nome = dados.nome();
+        this.login = dados.login();
+        this.senha = dados.senha();
+        this.ativo = true;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
