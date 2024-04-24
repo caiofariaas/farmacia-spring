@@ -12,8 +12,8 @@ public record OutUsuarioDTO(
 
     public OutUsuarioDTO(Usuario usuario){
         this(usuario.getId(),
-                usuario.getLogin(),
-                usuario.getNome());
+                usuario.getNome(),
+                usuario.getLogin()
+                );
     }
-
 }

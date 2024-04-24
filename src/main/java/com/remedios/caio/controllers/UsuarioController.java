@@ -1,17 +1,11 @@
 package com.remedios.caio.controllers;
 
-import com.remedios.caio.dtos.usuarios.InUsuarioDTO;
 import com.remedios.caio.dtos.usuarios.OutUsuarioDTO;
-import com.remedios.caio.dtos.usuarios.UsuarioDTO;
 import com.remedios.caio.services.UsuarioService;
-import jakarta.transaction.Transactional;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 

@@ -42,6 +42,7 @@ public class Remedio {
     }
 
     // TODO Tratar Exceptions
+
     public void atualizarInfo(UptRemedioDTO dados) {
         if(!dados.nome().isBlank()){
             this.nome = dados.nome();

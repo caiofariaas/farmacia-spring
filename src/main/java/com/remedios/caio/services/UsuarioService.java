@@ -1,15 +1,11 @@
 package com.remedios.caio.services;
 
-import com.remedios.caio.dtos.usuarios.InUsuarioDTO;
 import com.remedios.caio.dtos.usuarios.OutUsuarioDTO;
-import com.remedios.caio.dtos.usuarios.UsuarioDTO;
 import com.remedios.caio.entities.Usuario;
 import com.remedios.caio.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -39,6 +35,7 @@ public class UsuarioService {
     public List<OutUsuarioDTO> getAll(){
         return this.repository.findAllByAtivoTrue().stream().map(OutUsuarioDTO::new).toList();
     }
+
 
     public void save(Usuario usuario){
 
