@@ -1,4 +1,4 @@
-package com.remedios.caio.security;
+package com.remedios.caio.controllers;
 
 
 import com.remedios.caio.dtos.usuarios.InUsuarioDTO;
