@@ -2,6 +2,7 @@ package com.remedios.caio.controllers;
 
 
 import com.remedios.caio.dtos.usuarios.InUsuarioDTO;
+import com.remedios.caio.dtos.usuarios.OutUsuarioDTO;
 import com.remedios.caio.security.dtos.AuthenticationDTO;
 import com.remedios.caio.security.dtos.TokenJwtDTO;
 import com.remedios.caio.security.services.AuthenticationService;
@@ -59,9 +60,7 @@ public class AuthenticationController {
                     @io.swagger.v3.oas.annotations.responses.ApiResponse( responseCode = "404",content = @Content),
                     @io.swagger.v3.oas.annotations.responses.ApiResponse( responseCode = "500",content = @Content),
             })
-    public ResponseEntity<Void> register(@RequestBody @Valid InUsuarioDTO dados){
-        authorizationService.register(dados);
-
-        return ResponseEntity.ok().build();
+    public ResponseEntity<OutUsuarioDTO> register(@RequestBody @Valid InUsuarioDTO dados){
+        return new ResponseEntity<>(authorizationService.register(dados), HttpStatus.OK);
     }
 }
