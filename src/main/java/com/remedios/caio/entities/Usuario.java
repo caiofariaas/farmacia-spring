@@ -1,6 +1,7 @@
 package com.remedios.caio.entities;
 
 import com.remedios.caio.dtos.usuarios.InUsuarioDTO;
+import com.remedios.caio.dtos.usuarios.enums.Roles;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -19,6 +20,7 @@ import java.util.List;
 @NoArgsConstructor
 @EqualsAndHashCode(of = "id")
 public class Usuario implements UserDetails {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -26,13 +28,11 @@ public class Usuario implements UserDetails {
     private String senha;
     private String nome;
     private Boolean ativo;
-
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-                inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
-    private List<Role> roles = new ArrayList<>();
-
-
+//
+//    @ElementCollection(fetch = FetchType.EAGER)
+//    @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
+//    @Column(name = "role_id")
+//    private List<Roles> roles = new ArrayList<>();
 
     // Construtor DTO
 
@@ -44,7 +44,6 @@ public class Usuario implements UserDetails {
         this.ativo = true;
         this.senha = encrypPassword;
     }
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
