@@ -1,12 +1,10 @@
 package com.remedios.caio.infra;
 
-import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.remedios.caio.dtos.ExceptionDTO;
 import com.remedios.caio.exceptions.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,25 +37,15 @@ public class GlobalControllerAdvice {
                 e.getFieldErrors().stream().map(ExceptionDTO::new).collect(Collectors.toList())));
     }
 
-    // Senha incorreta!
+    // Usuário ou senha incorreta!
 
-    @ExceptionHandler(BadCredentialsException.class)
+    @ExceptionHandler({BadCredentialsException.class, IllegalArgumentException.class})
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     @ResponseBody
-    public ResponseEntity<Object> handleBadCredentialsException(Exception e){
+    public ResponseEntity<Object> handleBadCredentialsException(){
 
         Map<String, Object> body = new HashMap<String, Object>();
-        body.put("message", e.getMessage());
-
-        return new ResponseEntity<>(body, HttpStatus.UNAUTHORIZED);
-    }
-
-    @ExceptionHandler(IllegalArgumentException.class)
-    @ResponseStatus(HttpStatus.UNAUTHORIZED)
-    public ResponseEntity<Object> handleIllegalArgumentException(Exception e){
-
-        Map<String, Object> body = new HashMap<String, Object>();
-        body.put("message", e.getMessage());
+        body.put("message", "Usuário inexistente ou senha inválida");
 
         return new ResponseEntity<>(body, HttpStatus.UNAUTHORIZED);
     }

@@ -26,6 +26,8 @@ public class Usuario implements UserDetails {
     private String nome;
     private Boolean ativo;
 
+
+
     // Construtor DTO
 
     // Senha criptografada!

@@ -42,6 +42,7 @@ public class UsuarioService {
         if (repository.findByLogin(usuario.getLogin()) != null){
             throw new IllegalArgumentException("Login ja existente!");
         }
+
         this.repository.save(usuario);
     }
 }
