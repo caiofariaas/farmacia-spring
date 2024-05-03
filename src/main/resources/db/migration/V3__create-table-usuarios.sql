@@ -3,6 +3,8 @@
     login VARCHAR(100) NOT NULL,
     senha VARCHAR(100) NOT NULL,
     nome VARCHAR(100) NOT NULL,
+    role VARCHAR(20) NOT NULL,
+    ativo TINYINT NOT NULL,
 
     PRIMARY KEY(id)
  );

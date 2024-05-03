@@ -2,6 +2,7 @@ package com.remedios.caio.entities;
 
 import com.remedios.caio.dtos.usuarios.InUsuarioDTO;
 import com.remedios.caio.dtos.usuarios.enums.Roles;
+import com.remedios.caio.dtos.usuarios.enums.UserRole;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -28,6 +29,7 @@ public class Usuario implements UserDetails {
     private String senha;
     private String nome;
     private Boolean ativo;
+    private UserRole role;
 //
 //    @ElementCollection(fetch = FetchType.EAGER)
 //    @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
@@ -43,11 +45,19 @@ public class Usuario implements UserDetails {
         this.nome = dados.nome();
         this.ativo = true;
         this.senha = encrypPassword;
+        this.role = UserRole.ROLE_USER;
     }
+
+    // Roles
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+
+        if(this.role == UserRole.ROLE_ADMIN) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
+
+        else if (this.role == UserRole.ROLE_MANAGER) return List.of(new SimpleGrantedAuthority("ROLE_MANAGER"), new SimpleGrantedAuthority("ROLE_USER"));
+
+        else return List.of(new SimpleGrantedAuthority("ROLE_USER"));
     }
 
     @Override
