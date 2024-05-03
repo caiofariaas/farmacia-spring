@@ -1,7 +1,6 @@
 package com.remedios.caio.entities;
 
 import com.remedios.caio.dtos.usuarios.InUsuarioDTO;
-import com.remedios.caio.dtos.usuarios.enums.Roles;
 import com.remedios.caio.dtos.usuarios.enums.UserRole;
 import jakarta.persistence.*;
 import lombok.*;
@@ -9,7 +8,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -30,15 +28,7 @@ public class Usuario implements UserDetails {
     private String nome;
     private Boolean ativo;
     private UserRole role;
-//
-//    @ElementCollection(fetch = FetchType.EAGER)
-//    @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
-//    @Column(name = "role_id")
-//    private List<Roles> roles = new ArrayList<>();
 
-    // Construtor DTO
-
-    // Senha criptografada!
 
     public Usuario(InUsuarioDTO dados, String encrypPassword) {
         this.login = dados.login();

@@ -25,6 +25,8 @@ public class AuthorizationService {
 
         Usuario usuario = new Usuario(dados, passwordEncoder.encode(dados.senha()));
 
+        System.out.println("ROLES - " + usuario.getAuthorities());
+
         usuarioService.save(usuario);
 
         return new OutUsuarioDTO(usuario);

@@ -13,6 +13,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -45,7 +46,6 @@ public class RemedioController {
                     @io.swagger.v3.oas.annotations.responses.ApiResponse( responseCode = "404",content = @Content),
                     @io.swagger.v3.oas.annotations.responses.ApiResponse( responseCode = "500",content = @Content),
             })
-    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<RemedioDTO> create(@RequestBody @Valid InRemedioDTO dados, UriComponentsBuilder uriBuilder){
 
         RemedioDTO remedio =  service.create(dados);
@@ -55,6 +55,7 @@ public class RemedioController {
         return ResponseEntity.created(uri).body(remedio);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping
     @Operation(summary = "Buscar todos os Remédios!",
             description ="Buscar todos os Remédios!",
