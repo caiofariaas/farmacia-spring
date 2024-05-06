@@ -33,7 +33,7 @@ public class AuthenticationController {
     @PostMapping("/login")
     @Operation(summary = "Fazer Login!",
             description ="Fazer Login!",
-            tags = {"Usuários"})
+            tags = {"Auth"})
     public ResponseEntity<TokenJwtDTO> login(@RequestBody @Valid AuthenticationDTO dados){
         System.out.println("Print controller " + authService.loginAndCreateToken(dados));
 
@@ -43,7 +43,7 @@ public class AuthenticationController {
     @PostMapping("/register")
     @Operation(summary = "Cadastro!",
             description ="Cadastro!",
-            tags = {"Usuários"})
+            tags = {"Auth"})
     public ResponseEntity<OutUsuarioDTO> register(@RequestBody @Valid InUsuarioDTO dados){
         return new ResponseEntity<>(authorizationService.register(dados), HttpStatus.OK);
     }
