@@ -2,11 +2,13 @@ package com.remedios.caio.services;
 
 import com.remedios.caio.dtos.usuarios.OutUsuarioDTO;
 import com.remedios.caio.entities.Usuario;
+import com.remedios.caio.exceptions.NotFoundException;
 import com.remedios.caio.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.NotAcceptableStatusException;
 
 import java.util.List;
 
@@ -18,11 +20,11 @@ public class UsuarioService {
 
     // USER DETAILS
 
-    public UserDetails getByLogin(String login){
+    public UserDetails getByLogin(String login) {
 
         UserDetails user = repository.findByLogin(login);
 
-        if(user == null){
+        if (user == null) {
             throw new BadCredentialsException("");
         }
 
@@ -32,17 +34,33 @@ public class UsuarioService {
 
     // CRUD
 
-    public List<OutUsuarioDTO> getAll(){
+    public List<OutUsuarioDTO> getAll() {
         return this.repository.findAllByAtivoTrue().stream().map(OutUsuarioDTO::new).toList();
     }
 
 
-    public void save(Usuario usuario){
+    public void save(Usuario usuario) {
 
-        if (repository.findByLogin(usuario.getLogin()) != null){
-            throw new IllegalArgumentException("Este login ja está sendo utilizado!");
+        if (repository.findByLogin(usuario.getLogin()) != null) {
+            throw new IllegalArgumentException("This login is already being used!");
         }
 
         this.repository.save(usuario);
+    }
+
+    public OutUsuarioDTO inativar(Long id) {
+        Usuario usuario = this.repository.findById(id).orElseThrow(() -> new NotFoundException("User not found!"));
+
+        usuario.setAtivo(false);
+
+        return new OutUsuarioDTO(usuario);
+    }
+
+    public OutUsuarioDTO ativar(Long id) {
+        Usuario usuario = this.repository.findById(id).orElseThrow(() -> new NotFoundException("User not found!"));
+
+        usuario.setAtivo(true);
+
+        return new OutUsuarioDTO(usuario);
     }
 }
