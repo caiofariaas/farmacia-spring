@@ -33,15 +33,7 @@ public class AuthenticationController {
     @PostMapping("/login")
     @Operation(summary = "Fazer Login!",
             description ="Fazer Login!",
-            tags = {"Usuários"},
-            responses = {
-                    @io.swagger.v3.oas.annotations.responses.ApiResponse( responseCode = "200",content = @Content(
-                            mediaType = "application/json")),
-                    @io.swagger.v3.oas.annotations.responses.ApiResponse( responseCode = "400",content = @Content),
-                    @io.swagger.v3.oas.annotations.responses.ApiResponse( responseCode = "401",content = @Content),
-                    @io.swagger.v3.oas.annotations.responses.ApiResponse( responseCode = "404",content = @Content),
-                    @io.swagger.v3.oas.annotations.responses.ApiResponse( responseCode = "500",content = @Content),
-            })
+            tags = {"Usuários"})
     public ResponseEntity<TokenJwtDTO> login(@RequestBody @Valid AuthenticationDTO dados){
         System.out.println("Print controller " + authService.loginAndCreateToken(dados));
 
@@ -51,15 +43,7 @@ public class AuthenticationController {
     @PostMapping("/register")
     @Operation(summary = "Cadastro!",
             description ="Cadastro!",
-            tags = {"Usuários"},
-            responses = {
-                    @io.swagger.v3.oas.annotations.responses.ApiResponse( responseCode = "200",content = @Content(
-                            mediaType = "application/json")),
-                    @io.swagger.v3.oas.annotations.responses.ApiResponse( responseCode = "400",content = @Content),
-                    @io.swagger.v3.oas.annotations.responses.ApiResponse( responseCode = "401",content = @Content),
-                    @io.swagger.v3.oas.annotations.responses.ApiResponse( responseCode = "404",content = @Content),
-                    @io.swagger.v3.oas.annotations.responses.ApiResponse( responseCode = "500",content = @Content),
-            })
+            tags = {"Usuários"})
     public ResponseEntity<OutUsuarioDTO> register(@RequestBody @Valid InUsuarioDTO dados){
         return new ResponseEntity<>(authorizationService.register(dados), HttpStatus.OK);
     }

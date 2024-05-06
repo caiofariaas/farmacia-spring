@@ -37,15 +37,7 @@ public class RemedioController {
     @Transactional
     @Operation(summary = "Cadastre um Remédio!",
             description ="Cadastre um Remédio!",
-            tags = {"Remedios"},
-            responses = {
-                    @io.swagger.v3.oas.annotations.responses.ApiResponse( responseCode = "200",content = @Content(
-                            mediaType = "application/json")),
-                    @io.swagger.v3.oas.annotations.responses.ApiResponse( responseCode = "400",content = @Content),
-                    @io.swagger.v3.oas.annotations.responses.ApiResponse( responseCode = "401",content = @Content),
-                    @io.swagger.v3.oas.annotations.responses.ApiResponse( responseCode = "404",content = @Content),
-                    @io.swagger.v3.oas.annotations.responses.ApiResponse( responseCode = "500",content = @Content),
-            })
+            tags = {"Remedios"})
     public ResponseEntity<RemedioDTO> create(@RequestBody @Valid InRemedioDTO dados, UriComponentsBuilder uriBuilder){
 
         RemedioDTO remedio =  service.create(dados);
@@ -55,19 +47,10 @@ public class RemedioController {
         return ResponseEntity.created(uri).body(remedio);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping
     @Operation(summary = "Buscar todos os Remédios!",
             description ="Buscar todos os Remédios!",
-            tags = {"Remedios"},
-            responses = {
-                    @io.swagger.v3.oas.annotations.responses.ApiResponse( responseCode = "200",content = @Content(
-                            mediaType = "application/json")),
-                    @io.swagger.v3.oas.annotations.responses.ApiResponse( responseCode = "400",content = @Content),
-                    @io.swagger.v3.oas.annotations.responses.ApiResponse( responseCode = "401",content = @Content),
-                    @io.swagger.v3.oas.annotations.responses.ApiResponse( responseCode = "404",content = @Content),
-                    @io.swagger.v3.oas.annotations.responses.ApiResponse( responseCode = "500",content = @Content),
-            })
+            tags = {"Remedios"})
     public ResponseEntity<List<OutRemedioDTO>> getAll(){
         return new ResponseEntity<>(service.getAll(), HttpStatus.OK);
     }
@@ -75,15 +58,7 @@ public class RemedioController {
     @GetMapping("/{id}")
     @Operation(summary = "Detalhar Remédio por ID!",
             description ="Detalhar Remédio por ID!",
-            tags = {"Remedios"},
-            responses = {
-                    @io.swagger.v3.oas.annotations.responses.ApiResponse( responseCode = "200",content = @Content(
-                            mediaType = "application/json")),
-                    @io.swagger.v3.oas.annotations.responses.ApiResponse( responseCode = "400",content = @Content),
-                    @io.swagger.v3.oas.annotations.responses.ApiResponse( responseCode = "401",content = @Content),
-                    @io.swagger.v3.oas.annotations.responses.ApiResponse( responseCode = "404",content = @Content),
-                    @io.swagger.v3.oas.annotations.responses.ApiResponse( responseCode = "500",content = @Content),
-            })
+            tags = {"Remedios"})
     public ResponseEntity<RemedioDTO>detalhar(@PathVariable Long id){
         return new ResponseEntity<>(service.detalhar(id), HttpStatus.OK);
     }
@@ -92,15 +67,7 @@ public class RemedioController {
     @Transactional
     @Operation(summary = "Atualizar Remédio!",
             description ="Atualizar Remédio!",
-            tags = {"Remedios"},
-            responses = {
-                    @io.swagger.v3.oas.annotations.responses.ApiResponse( responseCode = "200",content = @Content(
-                            mediaType = "application/json")),
-                    @io.swagger.v3.oas.annotations.responses.ApiResponse( responseCode = "400",content = @Content),
-                    @io.swagger.v3.oas.annotations.responses.ApiResponse( responseCode = "401",content = @Content),
-                    @io.swagger.v3.oas.annotations.responses.ApiResponse( responseCode = "404",content = @Content),
-                    @io.swagger.v3.oas.annotations.responses.ApiResponse( responseCode = "500",content = @Content),
-            })
+            tags = {"Remedios"})
     public ResponseEntity<OutRemedioDTO> atualizar(@PathVariable Long id, @RequestBody @Valid UptRemedioDTO dados){
         return new ResponseEntity<>(service.atualizar(id, dados), HttpStatus.OK);
     }
@@ -109,15 +76,7 @@ public class RemedioController {
     @Transactional
     @Operation(summary = "Deletar Remédio!",
             description ="Deletar Remédio!",
-            tags = {"Remedios"},
-            responses = {
-                    @io.swagger.v3.oas.annotations.responses.ApiResponse( responseCode = "200",content = @Content(
-                            mediaType = "application/json")),
-                    @io.swagger.v3.oas.annotations.responses.ApiResponse( responseCode = "400",content = @Content),
-                    @io.swagger.v3.oas.annotations.responses.ApiResponse( responseCode = "401",content = @Content),
-                    @io.swagger.v3.oas.annotations.responses.ApiResponse( responseCode = "404",content = @Content),
-                    @io.swagger.v3.oas.annotations.responses.ApiResponse( responseCode = "500",content = @Content),
-            })
+            tags = {"Remedios"})
     public ResponseEntity<OutRemedioDTO> delete(@PathVariable Long id){
         return new ResponseEntity<>(service.deletar(id), HttpStatus.NO_CONTENT);
     }
@@ -126,15 +85,7 @@ public class RemedioController {
     @Transactional
     @Operation(summary = "Inativar Remédio!",
             description ="Inativar Remédio!",
-            tags = {"Remedios"},
-            responses = {
-                    @io.swagger.v3.oas.annotations.responses.ApiResponse( responseCode = "200",content = @Content(
-                            mediaType = "application/json")),
-                    @io.swagger.v3.oas.annotations.responses.ApiResponse( responseCode = "400",content = @Content),
-                    @io.swagger.v3.oas.annotations.responses.ApiResponse( responseCode = "401",content = @Content),
-                    @io.swagger.v3.oas.annotations.responses.ApiResponse( responseCode = "404",content = @Content),
-                    @io.swagger.v3.oas.annotations.responses.ApiResponse( responseCode = "500",content = @Content),
-            })
+            tags = {"Remedios"})
     public ResponseEntity<OutRemedioDTO> inativar(@PathVariable Long id){
         return new ResponseEntity<>(service.inativar(id), HttpStatus.OK);
     }
@@ -143,15 +94,7 @@ public class RemedioController {
     @Transactional
     @Operation(summary = "Ativar Remédio!",
             description ="Ativar Remédio!",
-            tags = {"Remedios"},
-            responses = {
-                    @io.swagger.v3.oas.annotations.responses.ApiResponse( responseCode = "200",content = @Content(
-                            mediaType = "application/json")),
-                    @io.swagger.v3.oas.annotations.responses.ApiResponse( responseCode = "400",content = @Content),
-                    @io.swagger.v3.oas.annotations.responses.ApiResponse( responseCode = "401",content = @Content),
-                    @io.swagger.v3.oas.annotations.responses.ApiResponse( responseCode = "404",content = @Content),
-                    @io.swagger.v3.oas.annotations.responses.ApiResponse( responseCode = "500",content = @Content),
-            })
+            tags = {"Remedios"})
     public ResponseEntity<OutRemedioDTO> ativar(@PathVariable Long id){
         return new ResponseEntity<>(service.ativar(id), HttpStatus.OK);
     }
