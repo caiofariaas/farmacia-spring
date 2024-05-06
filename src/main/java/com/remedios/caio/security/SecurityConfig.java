@@ -33,8 +33,16 @@ public class SecurityConfig{
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(req -> {
                     req.requestMatchers(HttpMethod.POST, "/auth/**").permitAll();
-                    req.requestMatchers(HttpMethod.GET,"/remedios/**", "/remedios").hasAnyRole("ADMIN");
+
+                    req.requestMatchers(HttpMethod.POST, "/remedios").hasAnyRole("ADMIN", "MANAGER");
+                    req.requestMatchers(HttpMethod.PUT, "/remedios/**").hasAnyRole("ADMIN", "MANAGER");
+                    req.requestMatchers(HttpMethod.PATCH, "/remedios/**").hasAnyRole("ADMIN", "MANAGER");
+                    req.requestMatchers(HttpMethod.DELETE, "/remedios/**").hasAnyRole("ADMIN", "MANAGER");
+
+                    req.requestMatchers(HttpMethod.GET, "/remedios").hasAnyRole("ADMIN", "USER", "MANAGER");
+
                     req.requestMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**").permitAll();
+                    req.requestMatchers("/usuarios").hasAnyRole("ADMIN", "MANAGER");
                     req.anyRequest().authenticated();
                 })
                 .build();
