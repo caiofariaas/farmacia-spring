@@ -30,7 +30,6 @@ public class Usuario implements UserDetails {
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
-
     public Usuario(InUsuarioDTO dados, String encrypPassword) {
         this.login = dados.login();
         this.nome = dados.nome();

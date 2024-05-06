@@ -1,6 +1,7 @@
 package com.remedios.caio.services;
 
 import com.remedios.caio.dtos.usuarios.OutUsuarioDTO;
+import com.remedios.caio.dtos.usuarios.enums.UserRole;
 import com.remedios.caio.entities.Usuario;
 import com.remedios.caio.exceptions.NotFoundException;
 import com.remedios.caio.repositories.UsuarioRepository;
@@ -38,6 +39,7 @@ public class UsuarioService {
         return this.repository.findAllByAtivoTrue().stream().map(OutUsuarioDTO::new).toList();
     }
 
+    // SALVAR NO BANCO
 
     public void save(Usuario usuario) {
 
@@ -48,6 +50,8 @@ public class UsuarioService {
         this.repository.save(usuario);
     }
 
+    // DESATIVAR USUÁRIO
+
     public OutUsuarioDTO inativar(Long id) {
         Usuario usuario = this.repository.findById(id).orElseThrow(() -> new NotFoundException("User not found!"));
 
@@ -56,10 +60,23 @@ public class UsuarioService {
         return new OutUsuarioDTO(usuario);
     }
 
+    // ATIVAR USUÁRIO
+
     public OutUsuarioDTO ativar(Long id) {
         Usuario usuario = this.repository.findById(id).orElseThrow(() -> new NotFoundException("User not found!"));
 
         usuario.setAtivo(true);
+
+        return new OutUsuarioDTO(usuario);
+    }
+
+    // SETAR ROLES
+
+    public OutUsuarioDTO setPrivilege (Long id, UserRole role){
+
+        Usuario usuario = this.repository.findById(id).orElseThrow(() -> new NotFoundException("User not found!"));
+
+        usuario.setRole(role);
 
         return new OutUsuarioDTO(usuario);
     }

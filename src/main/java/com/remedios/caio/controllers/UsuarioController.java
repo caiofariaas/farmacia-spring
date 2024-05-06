@@ -1,13 +1,16 @@
 package com.remedios.caio.controllers;
 
 import com.remedios.caio.dtos.usuarios.OutUsuarioDTO;
+import com.remedios.caio.dtos.usuarios.PrivilegeDTO;
 import com.remedios.caio.dtos.usuarios.UsuarioDTO;
 import com.remedios.caio.services.UsuarioService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -70,5 +73,11 @@ public class UsuarioController {
             })
     public ResponseEntity<OutUsuarioDTO> ativar (@PathVariable Long id){
         return new ResponseEntity<>(service.ativar(id), HttpStatus.OK);
+    }
+
+    @PutMapping("/privilege/{id}")
+    @Transactional
+    public ResponseEntity<OutUsuarioDTO> privilege (@PathVariable Long id, @RequestBody @Valid PrivilegeDTO dados){
+        return new ResponseEntity<>(service.setPrivilege(id, dados.role()), HttpStatus.OK);
     }
 }
