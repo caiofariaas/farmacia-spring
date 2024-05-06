@@ -39,7 +39,7 @@ public class GlobalControllerAdvice {
 
     // Usuário ou senha incorreta!
 
-    @ExceptionHandler({BadCredentialsException.class, IllegalArgumentException.class})
+    @ExceptionHandler(BadCredentialsException.class)
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     @ResponseBody
     public ResponseEntity<Object> handleBadCredentialsException(){
@@ -48,5 +48,18 @@ public class GlobalControllerAdvice {
         body.put("message", "Usuário inexistente ou senha inválida");
 
         return new ResponseEntity<>(body, HttpStatus.UNAUTHORIZED);
+    }
+
+    // Login Existente
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    @ResponseBody
+    public ResponseEntity<Object> handleIllegalArgumentException(Exception e){
+        Map<String, Object> body = new HashMap<>();
+
+        body.put("message", e.getMessage());
+
+        return new ResponseEntity<>(body, HttpStatus.CONFLICT);
     }
 }

@@ -23,7 +23,7 @@ public class UsuarioService {
         UserDetails user = repository.findByLogin(login);
 
         if(user == null){
-            throw new BadCredentialsException("Usuário inexistente ou senha inválida");
+            throw new BadCredentialsException("");
         }
 
         System.out.println("USUARIO SERVICE - " + user.getUsername());
@@ -40,7 +40,7 @@ public class UsuarioService {
     public void save(Usuario usuario){
 
         if (repository.findByLogin(usuario.getLogin()) != null){
-            throw new IllegalArgumentException("Login ja existente!");
+            throw new IllegalArgumentException("Este login ja está sendo utilizado!");
         }
 
         this.repository.save(usuario);

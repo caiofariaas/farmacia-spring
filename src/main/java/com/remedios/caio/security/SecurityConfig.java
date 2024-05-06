@@ -33,7 +33,7 @@ public class SecurityConfig{
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(req -> {
                     req.requestMatchers(HttpMethod.POST, "/auth/**").permitAll();
-                    req.requestMatchers(HttpMethod.GET,"/remedios/**", "/remedios").hasAnyRole("ADMIN", "USER");
+                    req.requestMatchers(HttpMethod.GET,"/remedios/**", "/remedios").hasAnyRole("ADMIN");
                     req.requestMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**").permitAll();
                     req.anyRequest().authenticated();
                 })
