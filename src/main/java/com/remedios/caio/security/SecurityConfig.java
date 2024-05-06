@@ -34,10 +34,7 @@ public class SecurityConfig{
                 .authorizeHttpRequests(req -> {
                     req.requestMatchers(HttpMethod.POST, "/auth/**").permitAll();
 
-                    req.requestMatchers(HttpMethod.POST, "/remedios").hasAnyRole("ADMIN", "MANAGER");
-                    req.requestMatchers(HttpMethod.PUT, "/remedios/**").hasAnyRole("ADMIN", "MANAGER");
-                    req.requestMatchers(HttpMethod.PATCH, "/remedios/**").hasAnyRole("ADMIN", "MANAGER");
-                    req.requestMatchers(HttpMethod.DELETE, "/remedios/**").hasAnyRole("ADMIN", "MANAGER");
+                    req.requestMatchers( "/remedios", "/remedios/**").hasAnyRole("ADMIN", "MANAGER");
 
                     req.requestMatchers(HttpMethod.GET, "/remedios").hasAnyRole("ADMIN", "USER", "MANAGER");
 
