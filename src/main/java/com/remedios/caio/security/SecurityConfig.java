@@ -42,7 +42,7 @@ public class SecurityConfig{
                     req.requestMatchers(HttpMethod.GET, "/remedios").hasAnyRole("ADMIN", "USER", "MANAGER");
 
                     req.requestMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**").permitAll();
-                    req.requestMatchers("/usuarios").hasAnyRole("ADMIN", "MANAGER");
+                    req.requestMatchers("/usuarios", "/usuarios/**").hasAnyRole("ADMIN", "MANAGER");
                     req.anyRequest().authenticated();
                 })
                 .build();
